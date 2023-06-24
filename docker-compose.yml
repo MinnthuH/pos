@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 'laravelpos'
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/var/www/html
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: 'my_pos'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: ""
+    volumes:
+      - ./db:/var/lib/mysql
